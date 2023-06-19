@@ -1,2 +1,3 @@
-PI MLOps/Dataset/credits.csv
-PI MLOps/Dataset/movies_dataset.csv
+Dataset/credits.csv
+Dataset/movies_dataset.csv
+.gitignore
