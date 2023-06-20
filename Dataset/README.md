@@ -39,5 +39,5 @@ El archivo ```movies_dataset.csv``` contiene las siguientes características:
 * **status** - Estado actual de la película (si fue anunciada, si ya se estrenó, etc).
 * **tagline** - Frase celebre asociada a la película
 * **title** - Título de la película.
-vote_average - Puntaje promedio de reseñas de la película.
-vote_count - Número de votos recibidos por la película, en TMDB.
+* **vote_average** - Puntaje promedio de reseñas de la película.
+* **vote_count** - Número de votos recibidos por la película, en TMDB.
