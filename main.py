@@ -3,17 +3,18 @@ import pandas as pd
 
 app = FastAPI()
 
-df = pd.read_csv("Dataset/movies_clean.csv", parse_dates = ["release_date"])
+df = pd.read_csv("movies_clean.csv", parse_dates = ["release_date"])
 
+# Ruta de inicio
 @app.get("/")
 async def index():
-    return "Hola! API realizada por Danniela Rodríguez"
+    return "Hola! Bienvenido a mi API para consultar sobre películas, directores y actores"
 
 @app.get("/about")
 async def about():
     return "Proyecto MLOps"
 
-# Consigna 1
+# Ruta de cantidad de filmaciones para un determinado mes 
 @app.get("/cantidad_filmaciones_mes/{mes}")
 async def cantidad_filmaciones_mes(mes: str):
     '''Se ingresa el mes y la función retorna la cantidad de películas que se estrenaron ese mes históricamente'''
@@ -47,7 +48,7 @@ async def cantidad_filmaciones_mes(mes: str):
     return {'mes': mes, 'cantidad': cantidad}
 
 
-# Consigna 2 
+# Ruta de cantidad de filmaciones para un determinado día de la semana 
 @app.get("/cantidad_filmaciones_dia/{dia}")
 async def cantidad_filmaciones_dia(dia: str):
     '''Se ingresa el dia y la función retorna la cantidad de películas que se estrenaron ese dia históricamente'''
@@ -76,33 +77,44 @@ async def cantidad_filmaciones_dia(dia: str):
     return {'dia': dia, 'cantidad': cantidad}
 
 
-# Consigna 3
+# Ruta de búsqueda por título
 @app.get("/score_titulo/{titulo}")
 async def score_titulo(titulo: str):
     '''Se ingresa el título de una filmación esperando como respuesta el título, el año de estreno y el score'''
+    # Copia del dataframe original
+    df_copy = df.copy()
+    # Crear una copia de la columna de title en minúsculas
+    df_copy["title_lower"] = df_copy["title"].str.lower()
+    # Convertir el título a minúsculas y capitalizar la primera letra
+    titulo_lower = titulo.lower()
     # Filtrar el dataframe por el título de la película
-    resultado = df[df["title"] == titulo]
+    resultado = df_copy[df_copy["title_lower"] == titulo_lower]
     # Verificar si el resultado está vacío
     if resultado.empty:
         return f"No se encontró la película {titulo}"
     else:
         # Obtener el título, año de estreno y score/popularidad
-        title = resultado["title"].iloc[0]
+        titulo = resultado["title"].iloc[0]
         year = resultado["release_year"].iloc[0]
         score = resultado["popularity"].iloc[0]
-        # return f"La película {title} fue estrenada en el año {year} con un score/popularidad de {round(score, 4)}"
-        return {'titulo': title, 'anio': year, 'popularidad': score}
+        return {'titulo': titulo, 'anio': year, 'popularidad': score}
 
 
-# Consigna 4:
+# # Ruta de cantidad de votos para una determina película
 @app.get("/votos_titulo/{titulo}")
 async def votos_titulo(titulo: str):
     '''Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor 
     promedio de las votaciones. La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, 
-    retornara un mensaje avisando que no cumple esta condición y que por ende, no se devuelve ningún 
+    se retorna un mensaje avisando que no cumple esta condición y que por ende, no se devuelve ningún 
     valor.'''
+    # Copia del dataframe original
+    df_copy = df.copy()
+    # Crear una copia de la columna de title en minúsculas
+    df_copy["title_lower"] = df_copy["title"].str.lower()
+    # Convertir el título a minúsculas y capitalizar la primera letra
+    titulo_lower = titulo.lower()
     # Filtrar el dataframe por el título de la filmación
-    resultado = df[df["title"] == titulo]
+    resultado = df_copy[df_copy["title_lower"] == titulo_lower]
     # Verificar si el resultado está vacío
     if resultado.empty:
         return f"No se encontró la filmación {titulo}"
@@ -111,14 +123,17 @@ async def votos_titulo(titulo: str):
         year = resultado["release_year"].iloc[0]
         voto_total = resultado["vote_count"].iloc[0]
         voto_promedio = resultado["vote_average"].iloc[0]
-    # Verificar si la cantidad de votos es mayor o igual a 2000
-    if voto_total >= 2000:
-        return {'titulo': titulo, 'año': year, 'voto_total': voto_total, 'voto_promedio': voto_promedio}
-    else:
-        return f"No se encontraron suficientes votos para la filmación {titulo}"
+        # Retornar el nombre del titulo ubicado en la columna title
+        titulo = resultado["title"].iloc[0]
+        # Verificar si la cantidad de votos es mayor o igual a 2000
+        if voto_total >= 2000:
+            # Devolver la respuesta como un diccionario
+            return {'titulo': titulo, 'año': year, 'voto_total': voto_total, 'voto_promedio': voto_promedio}
+        else:
+            return f"No se encontraron suficientes votos para la filmación {titulo}"
 
 
-# Consigna 5:
+# Ruta de búsqueda por actor
 @app.get("/get_actor/{nombre_actor}")
 async def get_actor(nombre_actor: str):
     '''Se ingresa el nombre de un actor que se encuentre dentro de un dataset y la función retorna el éxito del 
@@ -130,16 +145,50 @@ async def get_actor(nombre_actor: str):
     df_copy["actors"].fillna("", inplace=True)
     # Separar los nombres de los actores en una lista
     df_copy["actors_list"] = df_copy["actors"].str.split(",")
+    # Convertir el nombre del director a minúsculas
+    nombre_actor = nombre_actor.title()
     # Función lambda para filtrar el dataframe por el nombre del actor
-    df_filtrado = df_copy[df_copy["actors_list"].apply(lambda x: nombre_actor in x)]
+    df_filtrado = df_copy[df_copy["actors_list"].apply(lambda x: nombre_actor in [nombre.title() for nombre in x])]
     # Cantidad de películas en las que el actor ha participado
     cantidad_peliculas = len(df_filtrado)
     # Calcular el retorno promedio de las películas en las que el actor ha participado
-    retorno_promedio = df_filtrado["return"].mean()
+    retorno_promedio = round(df_filtrado["return"].mean(), 4)
     # Calcular el retorno total del actor en todas las películas en las que ha participado
-    retorno_total = df_filtrado["return"].sum()
-    # return f"El actor {nombre_actor} ha participado de {cantidad_peliculas} filmaciones, el mismo ha conseguido un retorno de {round(retorno_total, 4)} con un promedio de {round(retorno_promedio, 4)} por filmación"
+    retorno_total = round(df_filtrado["return"].sum(), 4)
     return {'actor': nombre_actor, 'cantidad_filmaciones': cantidad_peliculas, 'retorno_total': retorno_total, 'retorno_promedio': retorno_promedio}
 
 
-# Consigna 6
+# Ruta de búsqueda por director
+@app.get("/get_director/{nombre_director}")
+async def get_director(nombre_director: str):
+    # Copia del dataframe original
+    df_copy = df.copy()
+    # Reemplazar los valores NaN en la columna "director" por una cadena vacía ""
+    df_copy["director"].fillna("", inplace=True)
+    # Separar los nombres de los directores en una lista
+    df_copy["director_list"] = df_copy["director"].str.split(",")
+    # Convertir el nombre del director a minúsculas
+    nombre_director = nombre_director.title()
+    # Función lambda para filtrar el dataframe por el nombre del director
+    resultado = df_copy.loc[df_copy["director_list"].apply(lambda x: nombre_director in [nombre.title() for nombre in x])]
+    # Verificar si el resultado está vacío
+    if resultado.empty:
+        return f"No se encontró el director {nombre_director}"
+    # Obtener el retorno total del director
+    retorno_total_director = round(resultado["return"].sum(), 4)
+    # Obtener una lista de diccionarios con información de cada película del director
+    peliculas = []
+    for index, row in resultado.iterrows():
+        pelicula = {
+            'titulo': row['title'],
+            'anio': row['release_year'],
+            'retorno_pelicula': round(row['return'], 4),
+            'budget_pelicula': row['budget'],
+            'revenue_pelicula': row['revenue']
+        }
+        peliculas.append(pelicula)
+    # Devolver la respuesta como un diccionario
+    return {'director': nombre_director,
+            'retorno_total_director': retorno_total_director,
+            'peliculas': peliculas,
+            }
