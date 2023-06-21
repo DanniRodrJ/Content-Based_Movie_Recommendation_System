@@ -3,7 +3,7 @@ import pandas as pd
 
 app = FastAPI()
 
-df = pd.read_csv("movies_clean.csv", parse_dates = ["release_date"])
+df = pd.read_csv("Dataset/movies_clean.csv", parse_dates = ["release_date"])
 
 # Ruta de inicio
 @app.get("/")
