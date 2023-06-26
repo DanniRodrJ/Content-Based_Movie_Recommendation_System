@@ -1,9 +1,12 @@
 from fastapi import FastAPI
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 app = FastAPI()
 
 df = pd.read_csv("Dataset/movies_clean.csv", parse_dates = ["release_date"])
+df2 = pd.read_csv("Dataset/recommendation.csv")
 
 # Ruta de inicio
 @app.get("/")
@@ -58,9 +61,11 @@ async def cantidad_filmaciones_dia(dia: str):
     dias = {
         'lunes': 'Monday',
         'martes': 'Tuesday',
+        'miercoles': 'Wednesday',
         'miércoles': 'Wednesday',
         'jueves': 'Thursday',
         'viernes': 'Friday',
+        'sabado': 'Saturday',
         'sábado': 'Saturday',
         'domingo': 'Sunday'
     }
@@ -87,16 +92,18 @@ async def score_titulo(titulo: str):
     df_copy["title_lower"] = df_copy["title"].str.lower()
     # Convertir el título a minúsculas y capitalizar la primera letra
     titulo_lower = titulo.lower()
-    # Filtrar el dataframe por el título de la película
+    # Filtrar el dataframe por el título de la filmación
     resultado = df_copy[df_copy["title_lower"] == titulo_lower]
     # Verificar si el resultado está vacío
     if resultado.empty:
         return f"No se encontró la película {titulo}"
     else:
-        # Obtener el título, año de estreno y score/popularidad
-        titulo = resultado["title"].iloc[0]
-        year = resultado["release_year"].iloc[0]
-        score = resultado["popularity"].iloc[0]
+        # Obtener la fila con la popularidad más alta para el título dado
+        fila_max_pop = resultado.loc[resultado['popularity'].idxmax()]
+        # Obtener el título, año de estreno y score/popularidad de la fila con la popularidad más alta
+        titulo = fila_max_pop["title"]
+        year = int(fila_max_pop["release_year"])
+        score = fila_max_pop["popularity"]
         return {'titulo': titulo, 'anio': year, 'popularidad': score}
 
 
@@ -120,8 +127,8 @@ async def votos_titulo(titulo: str):
         return f"No se encontró la filmación {titulo}"
     else:
         # Obtener el año de estreno, votos totales y promedio de votos
-        year = resultado["release_year"].iloc[0]
-        voto_total = resultado["vote_count"].iloc[0]
+        year = int(resultado["release_year"].iloc[0])
+        voto_total = int(resultado["vote_count"].iloc[0])
         voto_promedio = resultado["vote_average"].iloc[0]
         # Retornar el nombre del titulo ubicado en la columna title
         titulo = resultado["title"].iloc[0]
@@ -161,6 +168,9 @@ async def get_actor(nombre_actor: str):
 # Ruta de búsqueda por director
 @app.get("/get_director/{nombre_director}")
 async def get_director(nombre_director: str):
+    '''Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del
+    mismo a través del retorno. Además, deberá devolver el nombre de cada película con la fecha de lanzamiento,
+    retorno individual, costo y ganancia de la misma.'''
     # Copia del dataframe original
     df_copy = df.copy()
     # Reemplazar los valores NaN en la columna "director" por una cadena vacía ""
@@ -192,3 +202,31 @@ async def get_director(nombre_director: str):
             'retorno_total_director': retorno_total_director,
             'peliculas': peliculas,
             }
+
+# Machine Learning
+# Se crea una matriz TF-IDF a partir de los datos de la columna "overview"
+vectorizer_tfidf = TfidfVectorizer(stop_words = "english", ngram_range = (1, 2))
+matriz_tfidf = vectorizer_tfidf.fit_transform(df2['overview'])
+
+# Ruta de recomendación de peliculas
+@app.get('/recomendacion/{titulo}')
+async def recomendacion(titulo: str):
+    '''Se ingresa el nombre de una película y se recomienda las 5 películas más similares en una lista'''
+    index_movies = pd.Series(df2.index, index = df2['title']).drop_duplicates()
+    # Si el título de la película no esta en el índice, se devuelve un mensaje 
+    if titulo not in index_movies:
+        return "Película no encontrada"
+    # Se obtiene el indice de la película en la matriz TF-IDF
+    idx_movie = index_movies[titulo]
+    # Similitud del coseno entre la película y todas las demás en la matriz TF-IDF
+    similarity_cos = cosine_similarity(matriz_tfidf[idx_movie], matriz_tfidf).flatten()
+    # Lista de tuplas que contienen el índice de la película y su similitud con la película de entrada
+    similarity_list = list(enumerate(similarity_cos))
+    # Se ordena la lista de similitud en orden descendente
+    similarity_list = sorted(similarity_list, key = lambda x: x[1], reverse = True)
+    # Se seleccionan las 5 películas más similares y se retorna una lista con sus títulos
+    similarity_list = similarity_list[1:6] 
+    movie_index = [i[0] for i in similarity_list]
+    lista = df2['title'].iloc[movie_index].tolist()
+    return {'lista recomendada': lista}
+    
