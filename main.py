@@ -203,30 +203,33 @@ async def get_director(nombre_director: str):
             'peliculas': peliculas,
             }
 
+
 # Machine Learning
-# Se crea una matriz TF-IDF a partir de los datos de la columna "overview"
-vectorizer_tfidf = TfidfVectorizer(stop_words = "english", ngram_range = (1, 2))
-matriz_tfidf = vectorizer_tfidf.fit_transform(df2['overview'])
+# Se crea una instancia de la clase TfidfVectorizer con los parámetros deseados
+tfidf_4 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
+# Aplicar la transformación TF-IDF al texto contenido en las columnas "overview", "genres" y "vote_average" de 'df2'
+tfidf_matriz_4 = tfidf_4.fit_transform(df2['concatenado'])
 
 # Ruta de recomendación de peliculas
 @app.get('/recomendacion/{titulo}')
 async def recomendacion(titulo: str):
     '''Se ingresa el nombre de una película y se recomienda las 5 películas más similares en una lista'''
-    index_movies = pd.Series(df2.index, index = df2['title']).drop_duplicates()
-    # Si el título de la película no esta en el índice, se devuelve un mensaje 
-    if titulo not in index_movies:
+    # Se crea un objeto 'indices' que mapea los títulos de las películas a sus índices correspondientes en el DataFrame 'df2'
+    indices = pd.Series(df2.index, index=df2['title']).drop_duplicates()
+    # Se busca el índice de la película de entrada utilizando el objeto 'indices'
+    idx = pd.Series(indices[titulo]) if titulo in indices else None
+    # Si la película de entrada no se encuentra en el DataFrame, se devuelve un mensaje de error
+    if idx is None:
         return "Película no encontrada"
-    # Se obtiene el indice de la película en la matriz TF-IDF
-    idx_movie = index_movies[titulo]
-    # Similitud del coseno entre la película y todas las demás en la matriz TF-IDF
-    similarity_cos = cosine_similarity(matriz_tfidf[idx_movie], matriz_tfidf).flatten()
-    # Lista de tuplas que contienen el índice de la película y su similitud con la película de entrada
-    similarity_list = list(enumerate(similarity_cos))
-    # Se ordena la lista de similitud en orden descendente
-    similarity_list = sorted(similarity_list, key = lambda x: x[1], reverse = True)
-    # Se seleccionan las 5 películas más similares y se retorna una lista con sus títulos
-    similarity_list = similarity_list[1:6] 
-    movie_index = [i[0] for i in similarity_list]
-    lista = df2['title'].iloc[movie_index].tolist()
-    return {'lista recomendada': lista}
+    # Si el título de la película está duplicado, se devuelve el índice de la primera aparición del título en el DataFrame
+    if df2.duplicated(['title']).any():
+        primer_idx = df2[df2['title'] == titulo].index[0]
+        if not idx.equals(pd.Series(primer_idx)):
+            idx = pd.Series(primer_idx)
+    # Se calcula la similitud coseno entre la película de entrada y todas las demás películas en la matriz de características
+    similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_4[idx], tfidf_matriz_4).flatten()), key=lambda x: x[1], reverse=True)[1:6]
+    # Se obtienen los títulos de las películas más similares utilizando el índice de cada película
+    recomendaciones = df2.iloc[[i[0] for i in similitud], :]['title'].tolist()
+    # Se devuelve la lista de títulos de las películas recomendadas
+    return {'lista recomendada': recomendaciones}
     
