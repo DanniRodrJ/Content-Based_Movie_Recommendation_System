@@ -206,9 +206,9 @@ async def get_director(nombre_director: str):
 
 # Machine Learning
 # Se crea una instancia de la clase TfidfVectorizer con los parámetros deseados
-tfidf_4 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
-# Aplicar la transformación TF-IDF al texto contenido en las columnas "overview", "genres" y "vote_average" de 'df2'
-tfidf_matriz_4 = tfidf_4.fit_transform(df2['concatenado'])
+tfidf_1 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
+# Aplicar la transformación TF-IDF al texto contenido en la columna "overview" de 'df2'
+tfidf_matriz_1 = tfidf_1.fit_transform(df2['overview'])
 
 # Ruta de recomendación de peliculas
 @app.get('/recomendacion/{titulo}')
@@ -227,7 +227,7 @@ async def recomendacion(titulo: str):
         if not idx.equals(pd.Series(primer_idx)):
             idx = pd.Series(primer_idx)
     # Se calcula la similitud coseno entre la película de entrada y todas las demás películas en la matriz de características
-    similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_4[idx], tfidf_matriz_4).flatten()), key=lambda x: x[1], reverse=True)[1:6]
+    similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_1[idx], tfidf_matriz_1).flatten()), key=lambda x: x[1], reverse=True)[1:6]
     # Se obtienen los títulos de las películas más similares utilizando el índice de cada película
     recomendaciones = df2.iloc[[i[0] for i in similitud], :]['title'].tolist()
     # Se devuelve la lista de títulos de las películas recomendadas
