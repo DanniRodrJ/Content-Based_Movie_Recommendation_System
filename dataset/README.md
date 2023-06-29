@@ -6,15 +6,15 @@ Los archivos de datos sin procesar ```credits.csv``` y ```movies_dataset.csv```,
 
 ## Data limpia
 
-El archivo csv limpio obtenido del proceso ETL realizado en el notebook ```ETL_Movies.ipynb``` se encuentra alojado en este repositorio con el nombre de ```movies_clean.csv```
+El archivo csv limpio obtenido del proceso ETL realizado en el notebook ```ETL.ipynb``` se encuentra alojado en este repositorio con el nombre de ```movies_clean.csv```
 
 ## Data para las consultas sobre películas, directores y actores
 
-Para evitar el coste en términos de recursos, se creó el archivo ```movies_api.csv```, que contiene solo las columnas necesarias para realizar consultas.
+Para evitar el coste en términos de recursos, se creó el archivo ```api_consultation.csv```, que contiene solo las columnas necesarias para realizar consultas.
 
 ## Data para el modelo de Machine Learning
 
-Para el modelo de Sistema de Recomendación de Películas, se utiliza el archivo ```recommendation.csv```, el cual se deriva del archivo ```movies_clean.csv``` y contiene solo dos columnas relevantes.
+Para el modelo de Sistema de Recomendación de Películas, se utiliza el archivo ```movies_recommendations.csv```, el cual se deriva del archivo ```movies_clean.csv``` y contiene solo dos columnas relevantes.
 
 ## Diccionario de datos
 
