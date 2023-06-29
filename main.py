@@ -1,29 +1,35 @@
+# Importación de librerías necesarias
 from fastapi import FastAPI
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+# Punto de partida para construir una aplicación web API
 app = FastAPI()
 
-df = pd.read_csv("dataset/movies_clean.csv", parse_dates = ["release_date"])
-df2 = pd.read_csv("dataset/recommendation.csv")
+# Leer los archivos .csv para el consumo de la API
+df = pd.read_csv("movies_clean.csv", parse_dates = ["release_date"])
+df2 = pd.read_csv("recommendation.csv")
 
 # Ruta de inicio
 @app.get("/")
 async def index():
-    return "Hola! Bienvenido a mi API para consultar sobre películas, directores y actores"
+    message = "¡Bienvenid@ a mi API para consultar y recibir recomendaciones de películas! Para más información, visite /docs"
+    return {"message": message}
 
+# Ruta de información
 @app.get("/about")
 async def about():
-    return "Proyecto MLOps"
+    return "Esta es una aplicación FastAPI creada por Danniela Rodríguez Jove, en junio de 2023."
+
 
 # Ruta de cantidad de filmaciones para un determinado mes 
 @app.get("/cantidad_filmaciones_mes/{mes}")
 async def cantidad_filmaciones_mes(mes: str):
-    '''Se ingresa el mes y la función retorna la cantidad de películas que se estrenaron ese mes históricamente'''
+    '''Se ingresa el mes y la función retorna la cantidad de películas que se estrenaron ese mes históricamente.'''
     # Convertir el mes a minúsculas para facilitar la comparación
     mes = mes.lower()
-    # Diccionario para mapear los nombres de los meses en español con sus equivalentes en inglés
+    # Se crea un diccionario para mapear los nombres de los meses en español con sus equivalentes en inglés
     meses = {
         'enero': 'January',
         'febrero': 'February',
@@ -47,17 +53,17 @@ async def cantidad_filmaciones_mes(mes: str):
     resultado = df[df["release_date"].dt.strftime('%B') == mes_ingles]
     # Obtener la cantidad de películas estrenadas en el mes
     cantidad = len(resultado)
-    # Devolver la respuesta como un diccionario
+    # Se devuelve la respuesta como un diccionario
     return {'mes': mes, 'cantidad': cantidad}
 
 
 # Ruta de cantidad de filmaciones para un determinado día de la semana 
 @app.get("/cantidad_filmaciones_dia/{dia}")
 async def cantidad_filmaciones_dia(dia: str):
-    '''Se ingresa el dia y la función retorna la cantidad de películas que se estrenaron ese dia históricamente'''
+    '''Se ingresa el dia y la función retorna la cantidad de películas que se estrenaron ese dia históricamente.'''
     # Convertir el día a minúsculas para facilitar la comparación
     dia = dia.lower()
-    # Crear un diccionario para mapear los nombres de los días en español con sus equivalentes en inglés
+    # Se crea un diccionario para mapear los nombres de los días en español con sus equivalentes en inglés
     dias = {
         'lunes': 'Monday',
         'martes': 'Tuesday',
@@ -78,15 +84,15 @@ async def cantidad_filmaciones_dia(dia: str):
     resultado = df[df["release_date"].dt.strftime('%A') == dia_ingles]
     # Obtener la cantidad de películas estrenadas en el día
     cantidad = len(resultado)
-    # Devolver la respuesta como un diccionario
+    # Se devuelve la respuesta como un diccionario
     return {'dia': dia, 'cantidad': cantidad}
 
 
 # Ruta de búsqueda por título
 @app.get("/score_titulo/{titulo}")
 async def score_titulo(titulo: str):
-    '''Se ingresa el título de una filmación esperando como respuesta el título, el año de estreno y el score'''
-    # Copia del dataframe original
+    '''Se ingresa el título de una filmación esperando como respuesta el título, el año de estreno y el score.'''
+    # Copia del dataframe original para no afectar futuras consultas 
     df_copy = df.copy()
     # Crear una copia de la columna de title en minúsculas
     df_copy["title_lower"] = df_copy["title"].str.lower()
@@ -96,7 +102,7 @@ async def score_titulo(titulo: str):
     resultado = df_copy[df_copy["title_lower"] == titulo_lower]
     # Verificar si el resultado está vacío
     if resultado.empty:
-        return f"No se encontró la película {titulo}"
+        return f"No se encontró la filmación {titulo}"
     else:
         # Obtener la fila con la popularidad más alta para el título dado
         fila_max_pop = resultado.loc[resultado['popularity'].idxmax()]
@@ -104,6 +110,7 @@ async def score_titulo(titulo: str):
         titulo = fila_max_pop["title"]
         year = int(fila_max_pop["release_year"])
         score = fila_max_pop["popularity"]
+        # Se devuelve la respuesta como un diccionario
         return {'titulo': titulo, 'anio': year, 'popularidad': score}
 
 
@@ -111,10 +118,10 @@ async def score_titulo(titulo: str):
 @app.get("/votos_titulo/{titulo}")
 async def votos_titulo(titulo: str):
     '''Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor 
-    promedio de las votaciones. La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, 
+    promedio de las votaciones. La misma película deberá de contar con al menos 2000 valoraciones, caso contrario, 
     se retorna un mensaje avisando que no cumple esta condición y que por ende, no se devuelve ningún 
     valor.'''
-    # Copia del dataframe original
+    # Copia del dataframe original para no afectar futuras consultas 
     df_copy = df.copy()
     # Crear una copia de la columna de title en minúsculas
     df_copy["title_lower"] = df_copy["title"].str.lower()
@@ -134,19 +141,20 @@ async def votos_titulo(titulo: str):
         titulo = resultado["title"].iloc[0]
         # Verificar si la cantidad de votos es mayor o igual a 2000
         if voto_total >= 2000:
-            # Devolver la respuesta como un diccionario
+            # Se devuelve la respuesta como un diccionario
             return {'titulo': titulo, 'año': year, 'voto_total': voto_total, 'voto_promedio': voto_promedio}
         else:
+            # En caso de que la cantidad de votos sea inferior a 2000, se devuelve un mensaje
             return f"No se encontraron suficientes votos para la filmación {titulo}"
 
 
 # Ruta de búsqueda por actor
 @app.get("/get_actor/{nombre_actor}")
 async def get_actor(nombre_actor: str):
-    '''Se ingresa el nombre de un actor que se encuentre dentro de un dataset y la función retorna el éxito del 
+    '''Se ingresa el nombre de un actor que se encuentre dentro del dataset y la función retorna: el éxito del 
     mismo medido a través del retorno, la cantidad de películas que en las que ha participado y el promedio de 
     retorno.'''
-    # Copia del dataframe original
+    # Copia del dataframe original para no afectar futuras consultas 
     df_copy = df.copy()
     # Reemplazar los valores NaN en la columna "actors" con una cadena vacía ""
     df_copy["actors"].fillna("", inplace=True)
@@ -168,10 +176,10 @@ async def get_actor(nombre_actor: str):
 # Ruta de búsqueda por director
 @app.get("/get_director/{nombre_director}")
 async def get_director(nombre_director: str):
-    '''Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del
-    mismo a través del retorno. Además, deberá devolver el nombre de cada película con la fecha de lanzamiento,
+    '''Se ingresa el nombre de un director que se encuentre dentro del dataset debiendo devolver: el éxito del
+    mismo a través del retorno, el nombre de cada película que ha dirigido con la fecha de lanzamiento,
     retorno individual, costo y ganancia de la misma.'''
-    # Copia del dataframe original
+    # Copia del dataframe original para no afectar futuras consultas 
     df_copy = df.copy()
     # Reemplazar los valores NaN en la columna "director" por una cadena vacía ""
     df_copy["director"].fillna("", inplace=True)
@@ -186,7 +194,7 @@ async def get_director(nombre_director: str):
         return f"No se encontró el director {nombre_director}"
     # Obtener el retorno total del director
     retorno_total_director = round(resultado["return"].sum(), 4)
-    # Obtener una lista de diccionarios con información de cada película del director
+    # Se crea una lista de diccionarios con la información de cada película que dirigió el director
     peliculas = []
     for index, row in resultado.iterrows():
         pelicula = {
@@ -197,7 +205,7 @@ async def get_director(nombre_director: str):
             'revenue_pelicula': row['revenue']
         }
         peliculas.append(pelicula)
-    # Devolver la respuesta como un diccionario
+    # Se devuelve la respuesta como un diccionario
     return {'director': nombre_director,
             'retorno_total_director': retorno_total_director,
             'peliculas': peliculas,
@@ -205,6 +213,10 @@ async def get_director(nombre_director: str):
 
 
 # Machine Learning
+'''Dado que el entorno gratuito de Render presenta limitaciones de memoria RAM, estratégicamente 
+se coloca la creación del objeto TfidfVectorizer fuera de la función recomendacion(). De esta manera se 
+garantiza que tfidf, y tfidf_matriz sean variables globales que se ejecutaran idealmente una sola vez 
+(cuando se carga el módulo), independientemente de cuántas veces se llame a la función recomendacion().'''
 # Se crea una instancia de la clase TfidfVectorizer con los parámetros deseados
 tfidf_1 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
 # Aplicar la transformación TF-IDF al texto contenido en la columna "overview" de 'df2'
