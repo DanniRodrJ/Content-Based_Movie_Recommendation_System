@@ -8,8 +8,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 app = FastAPI()
 
 # Leer los archivos .csv para el consumo de la API
-df = pd.read_csv("movies_clean.csv", parse_dates = ["release_date"])
-df2 = pd.read_csv("recommendation.csv")
+df = pd.read_csv("api_consultations.csv", parse_dates = ["release_date"])
+df2 = pd.read_csv("movies_recommendations.csv")
 
 # Ruta de inicio
 @app.get("/")
