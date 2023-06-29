@@ -2,17 +2,23 @@
 
 ## Archivos sin procesar
 
-Los archivos (```credits.csv``` y ```movies_dataset.csv```) se encuentran alojados en Google Drive, por lo que puedes acceder a ellos mediante el siguiente [link](https://drive.google.com/drive/folders/1uYpitLzf2ZTTltMB8LuqmZY8ctHLLIaV?usp=sharing)
+Los archivos de datos sin procesar ```credits.csv``` y ```movies_dataset.csv```, se encuentran alojados en Google Drive. Puedes acceder a ellos mediante el siguiente 👉 [link](https://drive.google.com/drive/folders/1uYpitLzf2ZTTltMB8LuqmZY8ctHLLIaV?usp=sharing)
 
 ## Data limpia
 
-El archivo csv limpio obtenido del proceso ETL realizado en el notebook ETL_Movies.ipynb se encuentra alojado en este repositorio con el nombre de ```movies_clean.csv```
+El archivo csv limpio obtenido del proceso ETL realizado en el notebook ```ETL_Movies.ipynb``` se encuentra alojado en este repositorio con el nombre de ```movies_clean.csv```
+
+## Data para las consultas sobre películas, directores y actores
+
+Para evitar el coste en términos de recursos, se creó el archivo ```movies_api.csv```, que contiene solo las columnas necesarias para realizar consultas.
 
 ## Data para el modelo de Machine Learning
 
+Para el modelo de Sistema de Recomendación de Películas, se utiliza el archivo ```recommendation.csv```, el cual se deriva del archivo ```movies_clean.csv``` y contiene solo dos columnas relevantes.
+
 ## Diccionario de datos
 
-El archivo ```credits.csv``` contiene las siguientes características:
+El archivo ```credits.csv``` contiene los siguientes atributos:
 
 * **id** - Un identificador único para cada película.
 * **cast** - El nombre de los actores principales y secundarios.
