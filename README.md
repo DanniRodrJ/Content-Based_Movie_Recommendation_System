@@ -42,7 +42,7 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
     ![Python](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)
 
-- **Librerías de Python**: se utilizaron diversas librerías de Python para diferentes tareas en el proyecto como pandas, numpy, datetime, ast, json, requests y re para la limpieza de los datos; fastAPI para las consultas de la data limpia; mientras que para el análisis exploratorio de los datos matplotlib, seaborn y wordcloud; así como scikit-learn para el modelado de sistema de recomendación de películas.
+- **Librerías de Python**: se utilizaron diversas librerías de Python para diferentes tareas en el proyecto como pandas, numpy, datetime, ast, json, requests y re para la limpieza de los datos; nltk para tratar con caracteres especiales; fastAPI para las consultas de la data limpia; mientras que para el análisis exploratorio de los datos matplotlib, seaborn y wordcloud; así como scikit-learn para el modelado de sistema de recomendación de películas.
 
     ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
     ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
@@ -166,7 +166,7 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 
 Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
 
-## ```Despliegue del modelo y las consultas```
+## 🌐```Despliegue del modelo y las consultas```
 
 ![Render](https://img.shields.io/badge/Render-46E3B7.svg?style=for-the-badge&logo=Render&logoColor=white)
 
