@@ -81,7 +81,7 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 - Se creo una nueva columna llamada ```return``` para permitir consultas relacionadas al retorno de inversión por película y director.
 - Se utilizó la API de TMDB para impitar datos faltantes en columnas que podían ser claves para el sistema de recomendación de películas como ```genre```.
 - Se emplearon técnicas como WordNetLemmatizer y word_tokenize para limpiar los caracteres especiales en columnas como ```overview```, evitando la pérdida de posibles palabras importantes para el sistema de recomendación.
-- Finalmente, se realizaron las siguientes importaciones:
+- Finalmente, se realizaron las siguientes exportaciones:
   - Toda la data limpia a un archivo .csv llamado 👉 [movies_clean.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
   - Data limpia con sólo las columnas necesarias para las consultas 👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
 
