@@ -221,7 +221,7 @@ garantiza que tfidf, y tfidf_matriz sean variables globales que se ejecutaran id
 # Se crea una instancia de la clase TfidfVectorizer con los parámetros deseados
 tfidf_1 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
 # Aplicar la transformación TF-IDF al texto contenido en la columna "overview" de 'df2'
-tfidf_matriz_1 = tfidf_1.fit_transform(df2['overview'])
+tfidf_matriz_1 = tfidf_1.fit_transform(df2['overview_clean'])
 
 # Ruta de recomendación de peliculas
 @app.get('/recomendacion/{titulo}', name = "Machine_Learning")
