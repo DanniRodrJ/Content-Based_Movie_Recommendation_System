@@ -172,9 +172,10 @@ Es importante mencionar que la selección final del modelo que se utilizó en es
 
 Para hacer el despliegue de las funciones de la API que incluyen las consultas así como el sistema de recomendación de películas se utilizó Render. El cual permitirá al equipo de la start-up poder realizar las consultas a través de una página web 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
-## 📋```Video y recomendaciones```
+## 🎥```Video```
 
+Video de presentación de las consultas y el sistema de recomendación de películas 👉 [Video](https://drive.google.com/drive/folders/1ftUL_1Yy_I5g-TVP1WiL4sjqXCOlW-HJ?usp=sharing)
 
 ## 👩‍💻 ```Desarrollador```
 
-![linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)
+[![linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/danniela-rodriguez-jove-/)
