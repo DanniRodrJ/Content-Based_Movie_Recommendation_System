@@ -1,6 +1,6 @@
 # ```Machine Learning Operations (MLOps)```
 
-![Devops](https://www.compunneldigital.com/wp-content/uploads/2022/08/MicrosoftTeams-image-115.png)
+![MLops](assets/MLOps.png)
 
 ## ```Introducción```
 
@@ -11,6 +11,8 @@ Como parte de mi formación como Data Scientist en la edtech [Henry](https://www
 Desarrollar un sistema de recomendación de películas y series personalizado para una start-up de agregación de plataformas de streaming.
 
 ## 💡```Desarrollo del Proyecto```
+
+![desarrollo](assets/desarollo.jpg)
 
 Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
@@ -36,7 +38,7 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
     2.3 Deployment del Modelo de Sistema de Recomendacion de Peliculas 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
-## 🛠️```Tecnologías Utilizadas```
+## 🛠️```Tecnologías y Herramientas Utilizadas```
 
 - **Python**: lenguaje de programación principal utilizado en el proyecto.
 
@@ -72,15 +74,16 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
 ## ⚙️ ```ETL```
 
-![etl](https://global-uploads.webflow.com/634fa785d369cb60d80b6dd1/6393298e18f50e62a1657530_ETL%20process%20DataChannel.webp)
+![etl](assets/ETL.png)
 
-- La información fue extraída de archivos .csv. La documentación y ubicación respecto a estos archivos se encuentran en la carpeta 📁 [dataset](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset)
+- La información fue extraída de archivos .csv. La documentación y ubicación respecto a estos archivos se encuentran en la 📁carpeta 👉 [dataset](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset)
 - Fue necesario desanidar la data, ya que existían columnas como ```belongs_to_collection``` , ```production_companies```, ```spoken_languages``` y ```genres``` por mencionar algunos con registros en formato JSON.
 - Una vez desanidada la data, se extrajo la información requerida como los nombres de los directores, actores, lenguajes hablados, etc. Los cuales fueron añadidos al Dataframe para facilitar consultas posteriores.
 - Se eliminaron las columnas que no se iban a utilizar, como ```video```, ```imdb_id```, ```adult```,```original_title```, ```poster_path``` y ```homepage```.
-- Se creo una nueva columna llamada ```return``` para permitir consultas relacionadas al retorno de inversión por película y director.
-- Se utilizó la API de TMDB para impitar datos faltantes en columnas que podían ser claves para el sistema de recomendación de películas como ```genre```.
-- Se emplearon técnicas como WordNetLemmatizer y word_tokenize para limpiar los caracteres especiales en columnas como ```overview```, evitando la pérdida de posibles palabras importantes para el sistema de recomendación.
+- Se creó una nueva columna llamada ```return``` para permitir consultas relacionadas al retorno de inversión por película y director.
+- Se utilizó la **API de TMDB** para imputar datos faltantes en columnas que podían ser claves para el sistema de recomendación de películas como ```genre```.
+- Se emplearon técnicas como **WordNetLemmatizer** y **word_tokenize** para limpiar los caracteres especiales en columnas como ```overview```, evitando la pérdida de posibles palabras importantes para el sistema de recomendación.
+- Para dejar todas las descripciones de la columna ```overview``` en un único idioma (inglés), se empleó la librería de **googletrans** que implementa la API de Google Translate.
 - Finalmente, se realizaron las siguientes exportaciones:
   - Toda la data limpia a un archivo .csv llamado 👉 [movies_clean.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
   - Data limpia con sólo las columnas necesarias para las consultas 👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
@@ -89,7 +92,7 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
 ![fastapi](https://www.nahuelbrandan.com/assets/img/posts/FastAPI.webp)
 
-Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework FastAPI. Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py)
+Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi). Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py)
 
 Primero se construyó la API de forma local y se configuraron las funciones necesarias para realizar las consultas, cargando la data desde el archivo 👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
 
@@ -128,24 +131,31 @@ Estos endpoints son los siguientes:
         }],
             }
 
-Estos endpoints permitirán que los empleados de la empresa puedan hacer solicitudes específicas a la API para obtener información valiosa o realizar acciones específicas.
+Estos permitirán que los empleados de la empresa puedan hacer solicitudes específicas a la API para obtener información valiosa o realizar acciones específicas.
+
+![endpoints](assets/consultas.png)
 
 ## 📊 ```EDA```
 
-Una vez que los datos fueron limpiados, se realizó una análisis exploratorio para identificar patrones, relaciones y tendencias en los datos, así como valores atípicos. En este contexto se llevaron a cabo algunas exploraciones interesantes en las siguientes columnas:
+Una vez que los datos fueron limpiados, se realizó un análisis exploratorio para identificar patrones, relaciones y tendencias en los datos, así como valores atípicos. En este contexto se llevaron a cabo algunas exploraciones interesantes en las siguientes columnas:
 
-- La nube de palabras de las columnas ```genre```, ``title`` y ```overview``` proporcionó información útil permitiendo identificar los géneros más populares así como las palabras más comunes en los títulos en las descripciones de las películas.
+- La nube de palabras de las columnas ```genre```, ``title`` y ```overview``` proporcionó información útil permitiendo identificar los géneros más populares así como las palabras más comunes en los títulos de las descripciones de las películas.
   ![overview](assets/overview.png)
-- Se utilizó un histograma de distribución de la longitud tanto para los títulos como para las descripciones, concluyendo que la mayoría de los títulos son relativamente cortos mientras que para el caso de la columna overview se identificó dos grupos diferentes de resúmenes con diferentes longitudes.
+- Se utilizó un histograma de distribución de la longitud tanto para los títulos como para las descripciones, concluyendo que la mayoría de los títulos son relativamente cortos mientras que para el caso de la columna ```overview``` se identificó dos grupos diferentes de resúmenes con diferentes longitudes.
   ![long_title](assets/longitud_title.png)
-- Mientras que las columnas como ```popularity``` y ```revenue``` presentaron una distribución fuertemente sesgada debido a valores atípicos. Como por ejemplo películas que han generado una gran cantidad de ingresos en taquilla y que por otro lado están las que no lograron recaudar o el valor de su ingreso aún no ha sido registrado.
+- Algunas columnas como ```popularity``` y ```revenue```, presentaron una distribución fuertemente sesgada debido a la presencia de valores atípicos. Por ejemplo, algunas películas han generado una gran cantidad de ingresos en taquilla, mientras que otras no lograron recaudar o el valor de sus ingresos aún no ha sido registrado. Destacando que estos valores atípicos no eran necesariamente errores en los datos.
 - Hay variables que presentaron una fuerte correlación positiva como son el caso de ```revenue``` y ```vote_count``` con 0.81, así como ```revenue``` y ```budget``` con 0.77.
-- Por otro lado, se observaron datos interesantes como que John Ford es el director con más número de apariciones, los resúmenes más cortos presentaron una mejor calificación promedio, el viernes es el día predilecto para el lanzamiento de las películas, etc.
+- Por otro lado, se observaron datos interesantes como que:
+  - John Ford es el director con más número de apariciones,
+  - Los resúmenes más cortos presentaron una mejor calificación promedio,
+  - El viernes es el día predilecto para el lanzamiento de las películas, etc.
 ![dia](assets/dia.png)
 
 ## 🤖```Machine Learning```
 
-Para implementar el sistema de recomendación, se utilizó la librería scikit-learn de Python, y se aplicó la técnica de vectorización TF-IDF para crear una matriz de vectores que describía el contenido de las películas en función de sus sinopsis. Luego, se utilizó la medida de similitud del coseno para calcular la similitud entre cada par de películas, y se ordenaron las películas según su score de similaridad.
+![ml](assets/ml.png)
+
+Para implementar el sistema de recomendación, se utilizó la librería ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white), y se aplicó la **técnica de vectorización TF-IDF** para crear una matriz de vectores que describía el contenido de las películas en función de sus sinopsis. Luego, se utilizó **la medida de similitud del coseno** para calcular la similitud entre cada par de películas, y se ordenaron las películas según su score de similaridad.
 
 ```python
 
@@ -156,6 +166,10 @@ similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_1[idx], tfidf_matriz
 
 ```
 
+Para el desarrollo de este sistema, se utilizó el siguiente dataset:
+
+- Data limpia con sólo las columnas ```title``` y ```overview_clean``` 👉 [movies_recommendations.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.csv)
+
 El resultado final fue una función de recomendación de películas escrita en Python, que toma como entrada el título de una película y devuelve una lista de las 5 películas más similares, ordenadas según su score de similaridad. La función también maneja casos en los que el título de la película no se encuentra en la base de datos o cuando hay títulos de películas duplicados que fueron lanzados en años distintos.
 
 Finalmente fue deployado como una función adicional de la API, llamada:
@@ -164,7 +178,9 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 
         Formato de salida: ['titulo_recomendado1', 'titulo_recomendado2', 'titulo_recomendado3', 'titulo_recomendado4', 'titulo_recomendado5']
 
-Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
+![ml_consultas](assets/ml_api.png)
+
+❗ Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
 
 ## 🌐```Despliegue del modelo y las consultas```
 
@@ -172,10 +188,18 @@ Es importante mencionar que la selección final del modelo que se utilizó en es
 
 Para hacer el despliegue de las funciones de la API que incluyen las consultas así como el sistema de recomendación de películas se utilizó Render. El cual permitirá al equipo de la start-up poder realizar las consultas a través de una página web 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
-## 🎥```Video```
+## 🎥```Video y demostración```
 
 Video de presentación de las consultas y el sistema de recomendación de películas 👉 [Video](https://drive.google.com/drive/folders/1ftUL_1Yy_I5g-TVP1WiL4sjqXCOlW-HJ?usp=sharing)
 
-## 👩‍💻 ```Desarrollador```
+Demostraciones:
+
+- Consulta
+  ![ejemplo_consulta](assets/consulta.gif)
+- Sistema de recomendación
+  ![Sistema_recomendacion](assets/sistema_completo.gif)
+
+## 👩‍💻 ```Data Scientist```
 
 [![linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/danniela-rodriguez-jove-/)
+[![gmail](https://img.shields.io/badge/gmail-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tu-correo@gmai.com)
