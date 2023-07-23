@@ -137,6 +137,8 @@ Estos permitirán que los empleados de la empresa puedan hacer solicitudes espec
 
 ## 📊 ```EDA```
 
+![EDA](assets/EDA.png)
+
 Una vez que los datos fueron limpiados, se realizó un análisis exploratorio para identificar patrones, relaciones y tendencias en los datos, así como valores atípicos. En este contexto se llevaron a cabo algunas exploraciones interesantes en las siguientes columnas:
 
 - La nube de palabras de las columnas ```genre```, ``title`` y ```overview``` proporcionó información útil permitiendo identificar los géneros más populares así como las palabras más comunes en los títulos de las descripciones de las películas.
@@ -202,4 +204,4 @@ Demostraciones:
 ## 👩‍💻 ```Data Scientist```
 
 [![linkedin](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/danniela-rodriguez-jove-/)
-[![gmail](https://img.shields.io/badge/gmail-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tu-correo@gmai.com)
+[![gmail](https://img.shields.io/badge/gmail-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dannielarodriguezjove@gmai.com)
