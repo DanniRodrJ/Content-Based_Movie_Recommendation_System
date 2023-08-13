@@ -4,39 +4,43 @@
 
 ## ```Introducción```
 
-Como parte de mi formación como Data Scientist en la edtech [Henry](https://www.soyhenry.com/), se me asignó un proyecto para desarrollar un sistema de recomendación de películas. En este proyecto, simulé un ambiente de trabajo real en el cual una start-up de agregación de plataformas de streaming requería un sistema de recomendación que aún no había sido puesto en marcha. Como Data Scientist, mi responsabilidad fue desarrollar el sistema de recomendación de manera integral, desde la recolección, transformación y carga de los datos, así como el entrenamiento y despliegue del modelo de Machine Learning. Sin embargo, los datos disponibles en ese momento eran inmaduros y requerían una gran cantidad de trabajo de Data Engineer para transformarlos y prepararlos para su uso en el modelo.
+Como parte de mi formación como Data Scientist en la edtech [Henry](https://www.soyhenry.com/), se me asignó un proyecto para desarrollar un sistema de recomendación de películas. En este proyecto, simulé un ambiente de trabajo real en el cual una _start-up_ de agregación de plataformas de streaming requería un sistema de recomendación que aún no había sido puesto en marcha. Como Data Scientist, mi responsabilidad fue desarrollar el sistema de recomendación de manera integral, desde la recolección, transformación y carga de los datos, así como el entrenamiento y despliegue del modelo de Machine Learning. Sin embargo, los datos disponibles en ese momento eran inmaduros y requerían una gran cantidad de trabajo de Data Engineer para transformarlos y prepararlos para su uso en el modelo.
 
-## ✔️```Objetivo```
+## ✔️```Objetivos```
 
-Desarrollar un sistema de recomendación de películas y series personalizado para una start-up de agregación de plataformas de streaming.
+- Desarrollar un sistema de recomendación de películas y series para la _start-up_ de agregación de plataformas de streaming.
+
+- Disponibilizar los datos de la empresa mediante una API web para permitir su consumo desde la web.
 
 ## 💡```Desarrollo del Proyecto```
 
-![desarrollo](assets/desarollo.jpg)
+![desarrollo](assets/PI1.png)
 
-Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
+Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 1. ```Ingeniería de Datos```
 
-    1.1 Extracción, Transformación y Limpieza de los datos (ETL) 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ETL.ipynb)
+    1.1 **Extracción, Transformación y Limpieza de los datos (ETL)**: Se realizaron las tareas necesarias para extraer los datos relevantes, transformarlos y limpiarlos para su posterior uso. Esto se documentó en el notebook 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ETL.ipynb)
 
-    1.2 Disponibilización de los datos limpios
+    1.2 **Disponibilización de los datos limpios**: Los datos limpios se pusieron a disposición en diferentes archivos, como
 
-    👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
-    👉 [movies_recommendations.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.csv)
-    👉 [movies_clean.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
+    👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
+    👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.csv)
+    👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
 
-    1.3 Desarrollo de la API 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py)
+2. ```Desarrollo de Software```
 
-    1.4 Virtualización y Deployment para disponibilizar los datos para futuras consultas.
+    2.1 **Desarrollo de la API**: Se desarrolló una API utilizando el código proporcionado en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py). Esta API permitirá el acceso y la consulta de los datos disponibles.
 
-2. ```Machine Learning```
+    2.2 **Virtualización y Deployment**: Se realizó la virtualización y el despliegue de la infraestructura necesaria para que la API esté disponible y sea accesible para futuras consultas. Esta se desplegó en el siguiente enlace: 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
-    2.1 Análisis Exploratorio de los datos (EDA) 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/EDA.ipynb)
+3. ```Machine Learning```
 
-    2.2 Entrenamiento del Modelo 👉 [ML.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ML.ipynb)
+    3.1 **Análisis Exploratorio de los datos (EDA)**: Se realizó un análisis exploratorio de los datos utilizando el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/EDA.ipynb). Esto implicó estudiar las caracterísiticas de los datos y extraer información relevante para el desarrollo del modelo.
 
-    2.3 Deployment del Modelo de Sistema de Recomendacion de Peliculas 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
+    3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
+
+    3.3 **Deployment del Modelo de Sistema de Recomendacion de Peliculas**: Se realizó el despliegue del modelo entrenado, el cual se desplegó en el siguiente vínculo 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
 ## 🛠️```Tecnologías y Herramientas Utilizadas```
 
@@ -44,13 +48,22 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
     ![Python](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)
 
-- **Librerías de Python**: se utilizaron diversas librerías de Python para diferentes tareas en el proyecto como pandas, numpy, datetime, ast, json, requests y re para la limpieza de los datos; nltk para tratar con caracteres especiales; fastAPI para las consultas de la data limpia; mientras que para el análisis exploratorio de los datos matplotlib, seaborn y wordcloud; así como scikit-learn para el modelado de sistema de recomendación de películas.
+- **Librerías de Python**: se utilizaron diversas librerías de Python para diferentes tareas en el proyecto. Algunas incluyen:
+  - ```pandas``` y ```numpy```: para el procesamiento y manipulación de los datos.
+  - ```datetime```, ```ast```, ```json``` y ```requests```: para diversas tareas relacionadas con el manejo de fechas, la manipulación de estructuras de datos y solicitudes a la API de TMDB e IMDB.
+  - ```re``` para la limpieza de los datos y el uso de expresiones regulares.
+  - ```googletrans``` para dejar las descripciones de las películas en un único idioma.
+  - ```nltk``` para el tratamiento de caracteres especiales en los datos.
+  - ```matplotlib```, ```seaborn``` y ```wordcloud``` para el análisis exploratorio de los datos y la visualización.
+  - ```scikit-learn``` para el modelado del sistema de recomendación de películas.
+  - ```fuzzywuzzy``` para sugerir nombres de películas similares en caso de errores ortográficos en la entrada del usuario.
 
     ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
     ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
     ![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
     ![Seaborn](https://img.shields.io/badge/Seaborn-%2370399F.svg?style=for-the-badge&logo=seaborn&logoColor=white)
     ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
+    ![Googletrans](https://img.shields.io/badge/googletrans-%230077B5.svg?style=for-the-badge&logo=google-translate&logoColor=white)
 
 - **Google Colab**: plataforma de Jupyter Notebook basada en la nube que se utilizó para el proceso de ETL (Extracción, Transformación y Carga) de los datos, para el EDA (Análisis Exploratorio de datos) y para el Modelo de Machine Learning.
 
@@ -85,8 +98,8 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 - Se emplearon técnicas como **WordNetLemmatizer** y **word_tokenize** para limpiar los caracteres especiales en columnas como ```overview```, evitando la pérdida de posibles palabras importantes para el sistema de recomendación.
 - Para dejar todas las descripciones de la columna ```overview``` en un único idioma (inglés), se empleó la librería de **googletrans** que implementa la API de Google Translate.
 - Finalmente, se realizaron las siguientes exportaciones:
-  - Toda la data limpia a un archivo .csv llamado 👉 [movies_clean.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
-  - Data limpia con sólo las columnas necesarias para las consultas 👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
+  - Toda la data limpia a un archivo .parquet llamado 👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.csv)
+  - Data limpia con sólo las columnas necesarias para las consultas 👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
 
 ## 🖥️```FastAPI```
 
@@ -94,7 +107,7 @@ Para lograr el objetivo, se llevaron a cabo los siguientes procesos:
 
 Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi). Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py)
 
-Primero se construyó la API de forma local y se configuraron las funciones necesarias para realizar las consultas, cargando la data desde el archivo 👉 [api_consultation.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
+Primero se construyó la API de forma local y se configuraron las funciones necesarias para realizar las consultas, cargando la data desde el archivo 👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.csv)
 
 Estos endpoints son los siguientes:
 
@@ -142,22 +155,34 @@ Estos permitirán que los empleados de la empresa puedan hacer solicitudes espec
 Una vez que los datos fueron limpiados, se realizó un análisis exploratorio para identificar patrones, relaciones y tendencias en los datos, así como valores atípicos. En este contexto se llevaron a cabo algunas exploraciones interesantes en las siguientes columnas:
 
 - La nube de palabras de las columnas ```genre```, ``title`` y ```overview``` proporcionó información útil permitiendo identificar los géneros más populares así como las palabras más comunes en los títulos de las descripciones de las películas.
+
+  ```title```
+  ![title](assets/title.png)
+  ```overview```
   ![overview](assets/overview.png)
+
 - Se utilizó un histograma de distribución de la longitud tanto para los títulos como para las descripciones, concluyendo que la mayoría de los títulos son relativamente cortos mientras que para el caso de la columna ```overview``` se identificó dos grupos diferentes de resúmenes con diferentes longitudes.
+
   ![long_title](assets/longitud_title.png)
 - Algunas columnas como ```popularity``` y ```revenue```, presentaron una distribución fuertemente sesgada debido a la presencia de valores atípicos. Por ejemplo, algunas películas han generado una gran cantidad de ingresos en taquilla, mientras que otras no lograron recaudar o el valor de sus ingresos aún no ha sido registrado. Destacando que estos valores atípicos no eran necesariamente errores en los datos.
-- Hay variables que presentaron una fuerte correlación positiva como son el caso de ```revenue``` y ```vote_count``` con 0.81, así como ```revenue``` y ```budget``` con 0.77.
+- Hay variables que presentaron correlaciones positivas significativas, indicando que:
+
+  ![correlacion](assets/corr.png)
+  - Las películas con mayores presupuestos tienden a generar mayores ingresos (0.77) y recibir mas votos (0.68)
+  - Las películas que generan mayores ingresos también suelen recibir más votos de los espectadores (0.81).
+  - Las películas populares tienen una tendencia moderada a recibir más votos (0.56) y generar mayores ingresos (0.51).
 - Por otro lado, se observaron datos interesantes como que:
-  - John Ford es el director con más número de apariciones,
-  - Los resúmenes más cortos presentaron una mejor calificación promedio,
-  - El viernes es el día predilecto para el lanzamiento de las películas, etc.
+  - John Ford es el director con más número de apariciones.
+  - Las descripciones más cortas presentaron una mejor calificación promedio.
+  - El viernes es el día predilecto para el lanzamiento de las películas.
+
 ![dia](assets/dia.png)
 
 ## 🤖```Machine Learning```
 
 ![ml](assets/ml.png)
 
-Para implementar el sistema de recomendación, se utilizó la librería ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white), y se aplicó la **técnica de vectorización TF-IDF** para crear una matriz de vectores que describía el contenido de las películas en función de sus sinopsis. Luego, se utilizó **la medida de similitud del coseno** para calcular la similitud entre cada par de películas, y se ordenaron las películas según su score de similaridad.
+Para implementar el sistema de recomendación se desarrolló un **Modelo basado en contenido** utilizando la librería ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white). Aplicando la **técnica de vectorización TF-IDF** para crear una matriz de vectores que describían el contenido de las películas en función de sus sinopsis. En conjunto de la **medida de similitud del coseno** para calcular la similitud entre cada par de películas, y ordenarlas según su score de similaridad.
 
 ```python
 
@@ -168,9 +193,9 @@ similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_1[idx], tfidf_matriz
 
 ```
 
-Para el desarrollo de este sistema, se utilizó el siguiente dataset:
+Por lo que para el desarrollo de este sistema, se utilizó el siguiente dataset:
 
-- Data limpia con sólo las columnas ```title``` y ```overview_clean``` 👉 [movies_recommendations.csv](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.csv)
+- Data limpia con sólo las columnas ```title``` y ```overview_clean``` 👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.csv)
 
 El resultado final fue una función de recomendación de películas escrita en Python, que toma como entrada el título de una película y devuelve una lista de las 5 películas más similares, ordenadas según su score de similaridad. La función también maneja casos en los que el título de la película no se encuentra en la base de datos o cuando hay títulos de películas duplicados que fueron lanzados en años distintos.
 
@@ -182,7 +207,9 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 
 ![ml_consultas](assets/ml_api.png)
 
-❗ Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
+⚠️ Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
+
+🎬 El modelo que mejor resultados presentó, utiliza las columnas ```title```, ```overview_clean```, ```genres```, ```director``` y ```actors```. Además maneja aquellos casos en que si el usuario ingresa el título de un película mal escrito o con letras faltantes, le retorna una sugerencia de acuerdo a si encontró alguna coincidencia en la data.
 
 ## 🌐```Despliegue del modelo y las consultas```
 
