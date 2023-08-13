@@ -8,9 +8,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 app = FastAPI(title = "Filmaciones: Consultas y Recomendaciones", 
               description = "Esta es una aplicación que permite realizar consultas sobre películas personalizadas")
 
-# Leer los archivos .csv para el consumo de la API
-df = pd.read_csv("api_consultations.csv", parse_dates = ["release_date"])
-df2 = pd.read_csv("movies_recommendations.csv")
+# Leer los archivos .parquet para el consumo de la API
+df = pd.read_parquet("api_consultations.parquet")
+df2 = pd.read_parquet("movies_recommendations.parquet")
 
 # Ruta de inicio
 @app.get("/")
@@ -25,7 +25,7 @@ async def about():
 
 
 # Ruta de cantidad de filmaciones para un determinado mes 
-@app.get("/cantidad_filmaciones_mes/{mes}", name = "Endpoint_1")
+@app.get("/cantidad_filmaciones_mes/{mes}", name = "Cantidad filmaciones (mes)")
 async def cantidad_filmaciones_mes(mes: str):
     '''Se ingresa el mes y la función retorna la cantidad de películas que se estrenaron ese mes históricamente.'''
     # Convertir el mes a minúsculas para facilitar la comparación
@@ -59,7 +59,7 @@ async def cantidad_filmaciones_mes(mes: str):
 
 
 # Ruta de cantidad de filmaciones para un determinado día de la semana 
-@app.get("/cantidad_filmaciones_dia/{dia}", name = "Endpoint_2")
+@app.get("/cantidad_filmaciones_dia/{dia}", name = "Cantidad filmaciones (día)")
 async def cantidad_filmaciones_dia(dia: str):
     '''Se ingresa el dia y la función retorna la cantidad de películas que se estrenaron ese dia históricamente.'''
     # Convertir el día a minúsculas para facilitar la comparación
@@ -90,7 +90,7 @@ async def cantidad_filmaciones_dia(dia: str):
 
 
 # Ruta de búsqueda por título
-@app.get("/score_titulo/{titulo}", name = "Endpoint_3")
+@app.get("/score_titulo/{titulo}", name = "Score de una filmación")
 async def score_titulo(titulo: str):
     '''Se ingresa el título de una filmación esperando como respuesta el título, el año de estreno y el score.'''
     # Copia del dataframe original para no afectar futuras consultas 
@@ -116,7 +116,7 @@ async def score_titulo(titulo: str):
 
 
 # # Ruta de cantidad de votos para una determina película
-@app.get("/votos_titulo/{titulo}", name = "Endpoint_4")
+@app.get("/votos_titulo/{titulo}", name = "Cantidad de votos de una filmación")
 async def votos_titulo(titulo: str):
     '''Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor 
     promedio de las votaciones. La misma película deberá de contar con al menos 2000 valoraciones, caso contrario, 
@@ -150,7 +150,7 @@ async def votos_titulo(titulo: str):
 
 
 # Ruta de búsqueda por actor
-@app.get("/get_actor/{nombre_actor}", name = "Endpoint_5")
+@app.get("/get_actor/{nombre_actor}", name = "Búsqueda por actor")
 async def get_actor(nombre_actor: str):
     '''Se ingresa el nombre de un actor que se encuentre dentro del dataset y la función retorna: el éxito del 
     mismo medido a través del retorno, la cantidad de películas que en las que ha participado y el promedio de 
@@ -175,7 +175,7 @@ async def get_actor(nombre_actor: str):
 
 
 # Ruta de búsqueda por director
-@app.get("/get_director/{nombre_director}", name = "Endpoint_6")
+@app.get("/get_director/{nombre_director}", name = "Búsqueda por director")
 async def get_director(nombre_director: str):
     '''Se ingresa el nombre de un director que se encuentre dentro del dataset debiendo devolver: el éxito del
     mismo a través del retorno, el nombre de cada película que ha dirigido con la fecha de lanzamiento,
@@ -224,7 +224,7 @@ tfidf_1 = TfidfVectorizer(stop_words="english", ngram_range=(1, 2))
 tfidf_matriz_1 = tfidf_1.fit_transform(df2['overview_clean'])
 
 # Ruta de recomendación de peliculas
-@app.get('/recomendacion/{titulo}', name = "Machine_Learning")
+@app.get('/recomendacion/{titulo}', name = "Sistema de recomendación")
 async def recomendacion(titulo: str):
     '''Se ingresa el nombre de una película y se recomienda las 5 películas más similares en una lista'''
     # Se crea un objeto 'indices' que mapea los títulos de las películas a sus índices correspondientes en el DataFrame 'df2'
