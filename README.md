@@ -36,7 +36,7 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 3. ```Machine Learning```
 
-    3.1 **Análisis Exploratorio de los datos (EDA)**: Se realizó un análisis exploratorio de los datos utilizando el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
+    3.1 **Análisis Exploratorio de los datos (EDA)**: Se llevó a cabo un análisis exploratorio de los datos, donde las visualizaciones más relevantes fueron documentadas en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset) y el código correspondiente se encuentra en el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
 
     3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
 
@@ -182,27 +182,37 @@ Demostraciones:
 - Sistema de recomendación
   ![Sistema_recomendacion](assets/sistema_completo.gif)
 
-## ```Guía de usuario```
+## 🧑‍💻​```Guía de usuario```
 
-Si quieres crear el sistema de recomendación y las consultas por tu cuenta debes asegurarte de crear y activar un entorno virtual, y tener los archivos necesarios para ello, estos son:
+Si quieres crear el sistema de recomendación y las consultas por tu cuenta, asegúrate de seguir estos pasos:
 
-- Código y librerías: ```main.py```, ```requirements.txt```
-- Datasets: ```movies_recommendations.parquet```, ```api_consultations.parquet```
+1. **Configuración del entorno virtual**:
+   - Crea un entorno virtual para el proyecto
+   - Activa el entorno virtual
+2. **Archivos necesarios**: Asegúrate de tener los siguientes archivos en tu entorno
+   - Código y librerías: ```main.py```, ```requirements.txt```
+   - Datasets: ```movies_recommendations.parquet```, ```api_consultations.parquet```
+3. **Ejecución local**:
+   - Ejecuta el archivo requirements.txt con pip para instalar las dependencias.
+   - Luego, ejecuta el comando ```uvicorn main:app --reload``` para iniciar la aplicación.
+   - Puedes encontrar una guía más detallada siguiendo el [tutorial](https://fastapi.tiangolo.com/tutorial/) adjunto.
+4. **Despliegue en Render:**
+   - Si deseas desplegar el proyecto en Render, te recomiendo seguir este [tutorial](https://github.com/HX-FNegrete/render-fastapi-tutorial) para obtener instrucciones detalladas.
 
-- **Ejecutar localmente**: Ejecuta el archivo requirements con pip y luego corre uvicorn. Puedes seguir el siguiente [tutorial](https://fastapi.tiangolo.com/tutorial/) para una mejor guia.
-        pip install -r requirements.txt
-        uvicorn main:app --reload
-- **Despliegue en Render**: Te sugiero el siguiente [tutorial](https://github.com/HX-FNegrete/render-fastapi-tutorial)
+Recuerda que al replicar este proyecto, puedes hacer un fork del repositorio en la parte superior derecha, reutilizar y modificar el código. No olvides mencionar este repositorio como fuente en tu proyecto 😊​.
 
-Si deseas replicar este proyecto puedes hacer un fork en la parte superior derecha, reutilizar y modificar el código. No olvides hacer mención a este repositorio como fuente.
+## 👩‍💻 ```Desarrollador```
 
-## 👩‍💻 ```Data Scientist```
+Si deseas contactarme, simplemente haz clic sobre mi nombre y serás redirigido a mi perfil de LinkedIn. Estaré encantada 🤗 de responder a tus consultas y compartir más detalles sobre mis habilidades y experiencia.
 
+<div align="center">
+
+*MLOps Engineer*
 | [<img src="https://avatars.githubusercontent.com/u/123108361?v=4" width=115><br><sub>Danniela Rodríguez</sub>](https://www.linkedin.com/in/danniela-rodriguez-jove-/)
 | :---: |
 
-[![gmail](https://img.shields.io/badge/gmail-%23D14836.svg?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dannielarodriguezjove@gmai.com)
+<div align="left">
 
 ## 🙌 ```Agradecimiento y Actualizaciones```
 
-_¡Gracias por revisar este proyecto 🤗! Si deseas estar al tanto de futuras actualizaciones, te invito a marcar el repositorio con un estrella. Puedes encontrar la opción para hacerlo en la parte superior derecha de la página. Tu apoyo es muy apreciado._
+*¡Gracias por revisar este proyecto* 🤗! *Si deseas estar al tanto de futuras actualizaciones, te invito a marcar el repositorio con un estrella* ⭐​. *Puedes encontrar la opción para hacerlo en la parte superior derecha de la página. Tu apoyo es muy apreciado.*
