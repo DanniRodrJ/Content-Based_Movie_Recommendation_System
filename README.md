@@ -20,25 +20,25 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 1. ```Ingeniería de Datos```
 
-    1.1 **Extracción, Transformación y Limpieza de los datos (ETL)**: Se realizaron las tareas necesarias para extraer los datos relevantes, transformarlos y limpiarlos para su posterior uso. Los cambios realizados fueron documentados en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset) y el código se encuentra en el notebook 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ETL.ipynb)
+    1.1 **Extracción, Transformación y Limpieza de los datos (ETL)**: Se realizaron las tareas necesarias para extraer los datos relevantes, transformarlos y limpiarlos para su posterior uso. Los cambios realizados fueron documentados en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/etl-eda) y el código se encuentra en el notebook 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/ETL.ipynb)
 
     1.2 **Disponibilización de los datos limpios**: Los datos limpios se pusieron a disposición en diferentes archivos, como
 
-    👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.parquet)
-    👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.parquet)
-    👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.parquet)
+    👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/api_consultations.parquet)
+    👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/movies_recommendations.parquet)
+    👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/dataset/movies_clean.parquet)
 
 2. ```Desarrollo de Software```
 
-    2.1 **Desarrollo de la API**: Se desarrolló una API utilizando el código proporcionado en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py). Esta API permitirá el acceso y la consulta de los datos disponibles.
+    2.1 **Desarrollo de la API**: Se desarrolló una API utilizando el código proporcionado en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/main.py). Esta API permitirá el acceso y la consulta de los datos disponibles.
 
     2.2 **Virtualización y Deployment**: Se realizó la virtualización y el despliegue de la infraestructura necesaria para que la API esté disponible y sea accesible para futuras consultas. Esta se desplegó en el siguiente enlace: 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
 3. ```Machine Learning```
 
-    3.1 **Análisis Exploratorio de los datos (EDA)**: Se llevó a cabo un análisis exploratorio de los datos, donde las visualizaciones más relevantes fueron documentadas en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset) y el código correspondiente se encuentra en el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
+    3.1 **Análisis Exploratorio de los datos (EDA)**: Se llevó a cabo un análisis exploratorio de los datos, donde las visualizaciones más relevantes fueron documentadas en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/etl-eda) y el código correspondiente se encuentra en el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
 
-    3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data-science-notebooks/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
+    3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
 
     3.3 **Deployment del Modelo de Sistema de Recomendacion de Películas**: Se realizó el despliegue del modelo entrenado, el cual se desplegó en el siguiente vínculo 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
@@ -89,7 +89,7 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 ![fastapi](https://www.nahuelbrandan.com/assets/img/posts/FastAPI.webp)
 
-Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi). Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Project_MLOps/blob/main/main.py)
+Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi). Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/main.py)
 
 Primero se construyó la API de forma local y se configuraron las funciones necesarias para realizar las consultas, cargando la data desde el archivo 👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.parquet)
 
@@ -149,7 +149,7 @@ similitud = sorted(enumerate(cosine_similarity(tfidf_matriz_1[idx], tfidf_matriz
 
 Por lo que para el desarrollo de este sistema, se utilizó el siguiente dataset:
 
-- Data limpia con sólo las columnas ```title``` y ```overview_clean``` 👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/movies_recommendations.parquet)
+- Data limpia con sólo las columnas ```title``` y ```overview_clean``` 👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/movies_recommendations.parquet)
 
 El resultado final fue una función de recomendación de películas escrita en Python, que toma como entrada el título de una película y devuelve una lista de las 5 películas más similares, ordenadas según su score de similaridad. La función también maneja casos en los que el título de la película no se encuentra en la base de datos o cuando hay títulos de películas duplicados que fueron lanzados en años distintos.
 
