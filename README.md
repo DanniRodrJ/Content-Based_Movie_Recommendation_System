@@ -87,7 +87,7 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 ## 🖥️```FastAPI```
 
-![fastapi](https://www.nahuelbrandan.com/assets/img/posts/FastAPI.webp)
+![fastapi](assets/fastapi.png)
 
 Se propone el desarrollo de una API para disponibilizar los datos de la empresa a través del framework ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi). Presentando 6 endpoints, en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/main.py)
 
@@ -164,6 +164,12 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 ⚠️ Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
 
 🎬 El modelo que mejor resultados presentó, utiliza las columnas ```title```, ```overview_clean```, ```genres```, ```director``` y ```actors```. Además maneja aquellos casos en que si el usuario ingresa el título de un película mal escrito o con letras faltantes, le retorna una sugerencia de acuerdo a si encontró alguna coincidencia en la data.
+
+## 🔄 ```Versión Moderna (2025)```
+
+> Para ver la versión más moderna que resuelve los problemas de la similitud léxica y utiliza modelos de lenguaje (Transformers) y Bases de Datos Vectoriales para la Similitud Semántica de alta eficiencia, visita mi proyecto.
+>
+> **[Semantic Movie Recommender 2025](https://github.com/DanniRodrJ/Semantic-Movie-Recommender-2025)**
 
 ## 🌐```Despliegue del modelo y las consultas```
 
