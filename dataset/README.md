@@ -6,7 +6,7 @@ Los archivos de datos sin procesar ```credits.csv``` y ```movies_dataset.csv```,
 
 ## Data limpia
 
-El archivo csv limpio obtenido del proceso ETL realizado en el notebook ```ETL.ipynb``` se encuentra alojado en este repositorio con el nombre de ```movies_clean.csv```
+El archivo csv limpio obtenido del proceso ETL realizado en el notebook ```ETL.ipynb``` se encuentra alojado en este repositorio con el nombre de ```movies_clean.parquet```
 
 ## Data para las consultas sobre películas, directores y actores
 
