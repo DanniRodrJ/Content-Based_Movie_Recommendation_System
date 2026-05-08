@@ -165,28 +165,11 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 
 🎬 El modelo que mejor resultados presentó, utiliza las columnas ```title```, ```overview_clean```, ```genres```, ```director``` y ```actors```. Además maneja aquellos casos en que si el usuario ingresa el título de un película mal escrito o con letras faltantes, le retorna una sugerencia de acuerdo a si encontró alguna coincidencia en la data.
 
-## 🔄 ```Versión Moderna (2025)```
+## 🔄 ```Versión Moderna (2026)```
 
 > Para ver la versión más moderna que resuelve los problemas de la similitud léxica y utiliza modelos de lenguaje (Transformers) y Bases de Datos Vectoriales para la Similitud Semántica de alta eficiencia, visita mi proyecto.
 >
 > **[Semantic Movie Recommender 2025](https://github.com/DanniRodrJ/Semantic-Movie-Recommender-2025)**
-
-<div align="center">
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px'}}}%%
-graph TD
-    A["movies_clean.parquet"] --> B["1. Cargar datos"]
-    B --> C["2. Generar embeddings<br>all-MiniLM-L6-v2"]
-    C --> D["3. Indexar en Vector DB<br>Chroma / Qdrant"]
-    D --> E["4. API FastAPI<br>POST /recommend"]
-    E --> F["5. Top 5 películas"]
-
-    classDef box fill:#f8f9fa,stroke:#ced4da,stroke-width:1px,rx:10px,ry:10px
-    class A,B,C,D,E,F box
-```
-
-<div align="left">
 
 ## 🌐```Despliegue del modelo y las consultas```
 
