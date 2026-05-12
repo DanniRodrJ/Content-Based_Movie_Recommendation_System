@@ -1,6 +1,21 @@
-# ```Machine Learning Operations (MLOps)```
+# ```Content-based movie recommendation system (TF -IDF)```
 
 ![MLops](assets/MLOps.png)
+
+## 🔄 ```Versión Moderna (2026)```
+Este repositorio contiene mi motor de recomendación basado en el contenido, desarrollado utilizando TF-IDF. Aunque sirvió como un sólido proyecto base, TF-IDF adolece de limitaciones fundamentales debido a la coincidencia exacta de palabras clave y a la escasa densidad de datos.
+
+Desde entonces, he perfeccionado este sistema hasta convertirlo en una arquitectura multimodal de última generación. La versión actual de este proyecto, Synapse, utiliza incrustaciones multimodales 768D, pgvector y la fusión de rangos recíprocos (RRF) para resolver el problema del «arranque en frío» y captar el contexto semántico profundo, en lugar de limitarse al texto.
+
+**👉 [Echa un vistazo aquí a la arquitectura mejorada de 2026](https://github.com/DanniRodrJ/Semantic-Movie-Recommender)**
+
+## 🚧 ```Actualización```
+
+El proyecto se encuentra en fase de actualización con el objetivo de tener una Arquitectura MLOps
+- **CI/CD**: GitHub Actions → Render
+- **Monitoreo**: Prometheus metrics
+- **Tests**: Pytest + integración continua
+- **Despliegue**: Docker + Render
 
 ## ```Introducción```
 
@@ -20,13 +35,13 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 1. ```Ingeniería de Datos```
 
-    1.1 **Extracción, Transformación y Limpieza de los datos (ETL)**: Se realizaron las tareas necesarias para extraer los datos relevantes, transformarlos y limpiarlos para su posterior uso. Los cambios realizados fueron documentados en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/etl-eda) y el código se encuentra en el notebook 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/ETL.ipynb)
+    1.1 **Extracción, Transformación y Limpieza de los datos (ETL)**: Se realizaron las tareas necesarias para extraer los datos relevantes, transformarlos y limpiarlos para su posterior uso. Los cambios realizados fueron documentados en la carpeta 📁[notebooks](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/notebooks) y el código se encuentra en el notebook 👉 [ETL.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/notebooks/ETL.ipynb)
 
     1.2 **Disponibilización de los datos limpios**: Los datos limpios se pusieron a disposición en diferentes archivos, como
 
     👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/api_consultations.parquet)
     👉 [movies_recommendations.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/movies_recommendations.parquet)
-    👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/dataset/movies_clean.parquet)
+    👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/data/movies_clean.parquet)
 
 2. ```Desarrollo de Software```
 
@@ -36,9 +51,9 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 3. ```Machine Learning```
 
-    3.1 **Análisis Exploratorio de los datos (EDA)**: Se llevó a cabo un análisis exploratorio de los datos, donde las visualizaciones más relevantes fueron documentadas en la carpeta 📁[etl-eda](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/etl-eda) y el código correspondiente se encuentra en el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
+    3.1 **Análisis Exploratorio de los datos (EDA)**: Se llevó a cabo un análisis exploratorio de los datos, donde las visualizaciones más relevantes fueron documentadas en la carpeta 📁[notebooks](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/tree/main/notebooks) y el código correspondiente se encuentra en el notebook 👉 [EDA.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/notebooks/EDA.ipynb). Esto implicó estudiar las características de los datos y extraer información relevante para el desarrollo del modelo.
 
-    3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/etl-eda/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
+    3.2 **Entrenamiento del Modelo**: Se entrenaron modelos utilizando el notebook 👉 [ML.ipynb](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/notebooks/ML.ipynb). Uno de los cuales se utilizó para el sistema de recomendación de películas.
 
     3.3 **Deployment del Modelo de Sistema de Recomendacion de Películas**: Se realizó el despliegue del modelo entrenado, el cual se desplegó en el siguiente vínculo 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
@@ -164,12 +179,6 @@ Finalmente fue deployado como una función adicional de la API, llamada:
 ⚠️ Es importante mencionar que la selección final del modelo que se utilizó en este proyecto estuvo sujeta a las limitaciones del plan de desarrollador gratuito de Render que ofrece 512 MB de memoria RAM.
 
 🎬 El modelo que mejor resultados presentó, utiliza las columnas ```title```, ```overview_clean```, ```genres```, ```director``` y ```actors```. Además maneja aquellos casos en que si el usuario ingresa el título de un película mal escrito o con letras faltantes, le retorna una sugerencia de acuerdo a si encontró alguna coincidencia en la data.
-
-## 🔄 ```Versión Moderna (2026)```
-
-> Para ver la versión más moderna que resuelve los problemas de la similitud léxica y utiliza modelos de lenguaje (Transformers) y Bases de Datos Vectoriales para la Similitud Semántica de alta eficiencia, visita mi proyecto.
->
-> **[Semantic Movie Recommender 2025](https://github.com/DanniRodrJ/Semantic-Movie-Recommender-2025)**
 
 ## 🌐```Despliegue del modelo y las consultas```
 
