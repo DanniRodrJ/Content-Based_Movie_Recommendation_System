@@ -4,7 +4,7 @@
 
 ![etl](/assets/ETL.png)
 
-- La información fue extraída de archivos ```.CSV```. La documentación y ubicación respecto a estos archivos se encuentran en la 📁[dataset](https://github.com/DanniRodrJ/Project_MLOps/tree/main/dataset)
+- La información fue extraída de archivos ```.CSV```. La documentación y ubicación respecto a estos archivos se encuentran en la 📁[data](https://github.com/DanniRodrJ/Project_MLOps/tree/main/data)
 - Fue necesario desanidar la data, ya que existían columnas como ```belongs_to_collection``` , ```production_companies```, ```spoken_languages``` y ```genres``` por mencionar algunos con registros en formato JSON.
 - Una vez desanidada la data, se extrajo la información requerida como los nombres de los directores, actores, lenguajes hablados, etc. Los cuales fueron añadidos al Dataframe para facilitar consultas posteriores.
 - Se eliminaron las columnas que no se iban a utilizar, como ```video```, ```imdb_id```, ```adult```,```original_title```, ```poster_path``` y ```homepage```.
@@ -13,7 +13,7 @@
 - Se emplearon técnicas como **WordNetLemmatizer** y **word_tokenize** para limpiar los caracteres especiales en columnas como ```overview```, evitando la pérdida de posibles palabras importantes para el sistema de recomendación.
 - Para dejar todas las descripciones de la columna ```overview``` en un único idioma (inglés), se empleó la librería de **googletrans** que implementa la API de Google Translate.
 - Finalmente, se realizaron las siguientes exportaciones:
-  - Toda la data limpia a un archivo .parquet llamado 👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/dataset/movies_clean.parquet)
+  - Toda la data limpia a un archivo .parquet llamado 👉 [movies_clean.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/data/movies_clean.parquet)
   - Data limpia con sólo las columnas necesarias para las consultas 👉 [api_consultation.parquet](https://github.com/DanniRodrJ/Project_MLOps/blob/main/api_consultations.parquet)
 
 ## 📊 ```EDA```

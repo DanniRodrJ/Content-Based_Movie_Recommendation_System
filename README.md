@@ -3,11 +3,11 @@
 ![MLops](assets/MLOps.png)
 
 ## 🔄 ```Versión Moderna (2026)```
-Este repositorio contiene mi motor de recomendación basado en el contenido, desarrollado utilizando TF-IDF. Aunque sirvió como un sólido proyecto base, TF-IDF adolece de limitaciones fundamentales debido a la coincidencia exacta de palabras clave y a la escasa densidad de datos.
+Este repositorio contiene un sistema de recomendación basado en TF-IDF. Aunque es un modelo base funcional, está estrictamente limitado a coincidencias exactas de texto (Item-to-Item) y es incapaz de procesar búsquedas por concepto.
 
-Desde entonces, he perfeccionado este sistema hasta convertirlo en una arquitectura multimodal de última generación. La versión actual de este proyecto, Synapse, utiliza incrustaciones multimodales 768D, pgvector y la fusión de rangos recíprocos (RRF) para resolver el problema del «arranque en frío» y captar el contexto semántico profundo, en lugar de limitarse al texto.
+Para solucionar estas limitaciones, evolucioné este sistema creando Synapse: una arquitectura moderna que utiliza Embeddings Multimodales 768D, pgvector y Búsqueda Híbrida (RRF) para entender el contexto semántico real y resolver la volatilidad del "arranque en frío".
 
-**👉 [Echa un vistazo aquí a la arquitectura mejorada de 2026](https://github.com/DanniRodrJ/Semantic-Movie-Recommender)**
+**👉 [Conoce la arquitectura evolucionada aquí: Synapse AI Recommendation Engine](https://github.com/DanniRodrJ/Semantic-Movie-Recommender)**
 
 ## 🚧 ```Actualización```
 
@@ -45,7 +45,7 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
 2. ```Desarrollo de Software```
 
-    2.1 **Desarrollo de la API**: Se desarrolló una API utilizando el código proporcionado en el archivo 👉 [main.py](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/main.py). Esta API permitirá el acceso y la consulta de los datos disponibles.
+    2.1 **Desarrollo de la API**: Se desarrolló una API 👉 [main.py](https://github.com/DanniRodrJ/Content-Based_Movie_Recommendation_System/blob/main/main.py) que permitirá el acceso y la consulta de los datos disponibles, a través de distintos endpoints.
 
     2.2 **Virtualización y Deployment**: Se realizó la virtualización y el despliegue de la infraestructura necesaria para que la API esté disponible y sea accesible para futuras consultas. Esta se desplegó en el siguiente enlace: 👉 [dannielarodriguez-project-mlops](https://dannielarodriguez-project-mlops.onrender.com/)
 
@@ -84,7 +84,7 @@ Para lograr los objetivos, se llevaron a cabo los siguientes procesos:
 
     ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00.svg?style=for-the-badge&logo=Google-Colab&logoColor=white)
 
-- **Visual Studio Code**: un editor de código fuente desarrollado por Microsoft que se utilizó para escribir y editar el código de Python para el desarrollo de las consultas a la API.
+- **Visual Studio Code**: para escribir y editar el código de Python para el desarrollo de las consultas a la API.
   
     ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=ffffff)
 
